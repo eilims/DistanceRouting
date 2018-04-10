@@ -6,7 +6,7 @@
 #include "BellmanFord.h"
 
 //Be sure to free the returned pointer once you are finished!
-int *findMinimumDistance(int **array, int arrayLength) {
+int *findMinimumDistance(int **array, int arrayLength, int startingIndex) {
     int nodeUnderTest;
     int currentEdge;
     int iteration;
@@ -18,7 +18,7 @@ int *findMinimumDistance(int **array, int arrayLength) {
     }
 
     //Begin processing
-    minimumArray[0] = 0;
+    minimumArray[startingIndex] = 0;
     //All iterations
     for (iteration = 0; iteration < arrayLength - 1; iteration++) {
         //Getting all edges

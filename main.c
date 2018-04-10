@@ -82,7 +82,7 @@ void initBellmanTestArrayWorking(int **array) {
 
 void testBellmanArray(int **array, int arraySize) {
     int i;
-    int *minimumArray = findMinimumDistance(array, arraySize);
+    int *minimumArray = findMinimumDistance(array, arraySize, 0);
     if (minimumArray != NULL) {
         printf("\nValid Minimum Table\n");
         for (i = 0; i < arraySize; i++) {
@@ -102,7 +102,7 @@ void printNodeArray(struct Node **nodeArray, int nodeArraySize) {
     printf("\nRouting tables\n");
     for (i = 0; i < nodeArraySize; i++) {
         for (o = 0; o < nodeArraySize; o++) {
-            printf("Source Node: %d Destination Node: %d Weight: %d\n", i, o, nodeArray[i]->routingTable[o].cost);
+            printf("Source Node: %d Destination Node: %d Weight: %d Next Node: %d\n", i, o, nodeArray[i]->routingTable[o].cost, nodeArray[i]->routingTable[o].nextNode);
         }
     }
     printf("\nTotal routing tables\n");
@@ -119,7 +119,8 @@ void printNodeArray(struct Node **nodeArray, int nodeArraySize) {
 }
 
 //Requires size of 3
-void setNodeArrayTest1(struct Node **nodeArray) {
+void setNodeArrayTest1(struct Node **nodeArray, int nodeArraySize) {
+    int i;
     nodeArray[0]->totalRoutingTable[0][0] = 0;
     nodeArray[0]->totalRoutingTable[0][1] = 1;
     nodeArray[0]->totalRoutingTable[0][2] = 5;
@@ -131,6 +132,11 @@ void setNodeArrayTest1(struct Node **nodeArray) {
     nodeArray[2]->totalRoutingTable[2][0] = 5;
     nodeArray[2]->totalRoutingTable[2][1] = 2;
     nodeArray[2]->totalRoutingTable[2][2] = 0;
+    for(i = 0; i < nodeArraySize; i++){
+        nodeArray[0]->routingTable[i].cost = nodeArray[0]->totalRoutingTable[0][i];
+        nodeArray[1]->routingTable[i].cost = nodeArray[1]->totalRoutingTable[1][i];
+        nodeArray[2]->routingTable[i].cost = nodeArray[2]->totalRoutingTable[2][i];
+    }
 }
 
 void allocateNodeArray(struct Node ***nodeArray, int nodeArraySize) {
@@ -203,10 +209,10 @@ int main() {
     initNodeArray(nodeArray, nodeArraySize);
 
     //Set test value
-    setNodeArrayTest1(nodeArray);
+    setNodeArrayTest1(nodeArray, nodeArraySize);
 
     //Verify proper sizing and assignment
-    //printNodeArray(nodeArray, nodeArraySize);
+//    printNodeArray(nodeArray, nodeArraySize);
 
     for (q = 0; q < nodeArraySize; q++) {
         for (i = 0; i < nodeArraySize; i++) {
