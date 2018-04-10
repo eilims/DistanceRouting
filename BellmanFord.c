@@ -25,7 +25,8 @@ int *findMinimumDistance(int **array, int arrayLength) {
         for (nodeUnderTest = 0; ((nodeUnderTest < arrayLength)); nodeUnderTest++) {
             for (currentEdge = 0; currentEdge < arrayLength; currentEdge++) {
                 //Make sure that the edge has been visited, the edge to the node exists, and the node is not the current one
-                if (array[nodeUnderTest][currentEdge] < INT_MAX && minimumArray[nodeUnderTest] != INT_MAX && currentEdge != nodeUnderTest) {
+                if (array[nodeUnderTest][currentEdge] < INT_MAX && minimumArray[nodeUnderTest] != INT_MAX &&
+                    currentEdge != nodeUnderTest) {
                     //if the combined minimum and the current weight are less than the existing minimum then takle the new one
                     if (array[nodeUnderTest][currentEdge] + minimumArray[nodeUnderTest] < minimumArray[currentEdge]) {
                         minimumArray[currentEdge] = array[nodeUnderTest][currentEdge] + minimumArray[nodeUnderTest];
@@ -34,6 +35,20 @@ int *findMinimumDistance(int **array, int arrayLength) {
             }
         }
     }
+
+    for (nodeUnderTest = 0; ((nodeUnderTest < arrayLength)); nodeUnderTest++) {
+        for (currentEdge = 0; currentEdge < arrayLength; currentEdge++) {
+            //Make sure that the edge has been visited, the edge to the node exists, and the node is not the current one
+            if (array[nodeUnderTest][currentEdge] < INT_MAX && minimumArray[nodeUnderTest] != INT_MAX &&
+                currentEdge != nodeUnderTest) {
+                //if the combined minimum and the current weight are less than the existing minimum then takle the new one
+                if (array[nodeUnderTest][currentEdge] + minimumArray[nodeUnderTest] < minimumArray[currentEdge]) {
+                    return NULL;
+                }
+            }
+        }
+    }
+
     return minimumArray;
 }
 
