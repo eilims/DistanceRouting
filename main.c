@@ -132,11 +132,6 @@ void setNodeArrayTest1(struct Node **nodeArray, int nodeArraySize) {
     nodeArray[2]->totalRoutingTable[2][0] = 5;
     nodeArray[2]->totalRoutingTable[2][1] = 2;
     nodeArray[2]->totalRoutingTable[2][2] = 0;
-    for(i = 0; i < nodeArraySize; i++){
-        nodeArray[0]->routingTable[i].cost = nodeArray[0]->totalRoutingTable[0][i];
-        nodeArray[1]->routingTable[i].cost = nodeArray[1]->totalRoutingTable[1][i];
-        nodeArray[2]->routingTable[i].cost = nodeArray[2]->totalRoutingTable[2][i];
-    }
 }
 
 void allocateNodeArray(struct Node ***nodeArray, int nodeArraySize) {

@@ -13,10 +13,6 @@ void updateRoutingTable(struct Node *sourceNode, struct Node *targetNode, int no
     for (i = 0; i < nodeArrayLength; i++) {
         //updating the targetNode total routing table
         targetNode->totalRoutingTable[sourceNodeIndex][i] = sourceNode->routingTable[i].cost;
-//        if (sourceNode->routingTable[i].cost != INT_MAX) {
-//            targetNode->totalRoutingTable[sourceNodeIndex][i] =
-//                    sourceNode->routingTable[i].cost + targetNode->totalRoutingTable[targetNodeIndex][i];
-//        }
     }
     int *minimumRouteArray = findMinimumDistance(targetNode->totalRoutingTable, nodeArrayLength, targetNodeIndex);
     for (i = 0; i < nodeArrayLength; i++) {
