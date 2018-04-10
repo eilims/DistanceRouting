@@ -17,7 +17,7 @@ int *findMinimumDistance(int **array, int arrayLength, int startingIndex) {
         minimumArray[nodeUnderTest] = INT_MAX;
     }
 
-    //Begin processing
+    //Begin processing from specified node
     minimumArray[startingIndex] = 0;
     //All iterations
     for (iteration = 0; iteration < arrayLength - 1; iteration++) {
