@@ -82,11 +82,11 @@ void initBellmanTestArrayWorking(int **array) {
 
 void testBellmanArray(int **array, int arraySize) {
     int i;
-    int *minimumArray = findMinimumDistance(array, arraySize, 0);
+    struct BellmanNode *minimumArray = findMinimumDistance(array, arraySize, 0);
     if (minimumArray != NULL) {
         printf("\nValid Minimum Table\n");
         for (i = 0; i < arraySize; i++) {
-            printf("Index: %d Value: %d\n", i, minimumArray[i]);
+            printf("Index: %d Value: %d Previous Node: %d\n", i, minimumArray[i].weight, minimumArray[i].previousNodeIndex);
         }
         //Free memory
         free(minimumArray);

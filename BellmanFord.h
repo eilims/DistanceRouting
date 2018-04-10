@@ -8,7 +8,12 @@
 #include <malloc.h>
 #include <limits.h>
 
-int* findMinimumDistance(int** array, int arrayLength, int startingIndex);
+struct BellmanNode {
+    int weight;
+    int previousNodeIndex;
+};
+
+struct BellmanNode* findMinimumDistance(int** array, int arrayLength, int startingIndex);
 
 
 #endif //DISTANCEROUTING_BELLMANFORD_H

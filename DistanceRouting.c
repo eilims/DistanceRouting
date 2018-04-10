@@ -10,14 +10,23 @@ void updateRoutingTable(struct Node *sourceNode, struct Node *targetNode, int no
     //the routing table from sourceNode is guaranteed to be the best option so it will always update
     //This is due to the routing table selecting the best option using bellman ford to update the routing table
     int i;
+    int o;
     for (i = 0; i < nodeArrayLength; i++) {
         //updating the targetNode total routing table
         targetNode->totalRoutingTable[sourceNodeIndex][i] = sourceNode->routingTable[i].cost;
     }
-    int *minimumRouteArray = findMinimumDistance(targetNode->totalRoutingTable, nodeArrayLength, targetNodeIndex);
+    struct BellmanNode *minimumRouteArray = findMinimumDistance(targetNode->totalRoutingTable, nodeArrayLength, targetNodeIndex);
     for (i = 0; i < nodeArrayLength; i++) {
-        targetNode->totalRoutingTable[targetNodeIndex][i] = minimumRouteArray[i];
-        targetNode->routingTable[i].cost = minimumRouteArray[i];
-        targetNode->routingTable[i].nextNode = i;
+        targetNode->routingTable[i].cost = minimumRouteArray[i].weight;
+        int tempIndex = i;
+        for(o = 0; o < nodeArrayLength && tempIndex != targetNodeIndex; o++){
+            if(minimumRouteArray[tempIndex].previousNodeIndex == targetNodeIndex){
+                targetNode->routingTable[i].nextNode = tempIndex;
+                tempIndex = targetNodeIndex;
+            } else {
+                tempIndex = minimumRouteArray[tempIndex].previousNodeIndex;
+            }
+        }
     }
+    free(minimumRouteArray);
 }
